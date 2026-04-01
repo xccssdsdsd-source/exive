@@ -27,7 +27,7 @@ const page = await browser.newPage();
 await page.setViewport({ width: 1440, height: 900 });
 await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
 await new Promise(r => setTimeout(r, 1500)); // wait for GSAP
-await page.screenshot({ path: filepath, fullPage: false });
+await page.screenshot({ path: filepath, fullPage: true });
 await browser.close();
 
 console.log(`Screenshot saved: temporary screenshots/${filename}`);

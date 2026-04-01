@@ -548,10 +548,19 @@
     .about__photo {
       aspect-ratio: 4/5;
       border-radius: 2px;
+      overflow: hidden;
     }
 
     .about__photo .img-placeholder__label {
       font-size: 0.9rem;
+    }
+
+    .about__photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .about__content {
@@ -1264,13 +1273,7 @@
       .hero__title { font-size: 2.5rem; }
     }
 
-    /* ═══════════════════════════════════════
-       REVEAL ANIMATION CLASSES
-    ═══════════════════════════════════════ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-    }
+    /* reveal class: GSAP handles initial state via immediateRender */
 
     /* Scrollbar for testimonials mobile */
     .testimonials__grid::-webkit-scrollbar { height: 3px; }
@@ -1379,8 +1382,8 @@
     <section class="about section-padding" id="about" aria-label="O mnie">
       <div class="container">
         <div class="about__grid">
-          <div class="about__photo img-placeholder reveal" aria-label="Zdjęcie Roberta Klyty">
-            <span class="img-placeholder__label">Zdjęcie wkrótce</span>
+          <div class="about__photo reveal">
+            <img src="assets/robert-klyta.jpg" alt="Robert Klyta" loading="lazy">
           </div>
           <div class="about__content reveal">
             <span class="section-label">O mnie</span>
