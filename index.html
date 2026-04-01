@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Robert Klyta | EXIVE Nieruchomości — nowe mieszkania i inwestycje w Bielsku-Białej i Podbeskidziu. Rynek pierwotny, 0% prowizji.">
+  <title>EXIVE Nieruchomości | Robert Klyta — Bielsko-Biała</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    /* ═══════════════════════════════════════
+       CSS CUSTOM PROPERTIES
+    ═══════════════════════════════════════ */
+    :root {
+      --navy:       #1B2A4A;
+      --navy-light: #2C3F6A;
+      --white:      #FFFFFF;
+      --off-white:  #F8F7F4;
+      --cream:      #F0EDE8;
+      --text-dark:  #0D1B2A;
+      --text-mid:   #4A5568;
+      --text-light: #8A9BB0;
+      --gold-line:  #C9A86C;
+    }
+
+    /* ═══════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-mid);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
+
+    /* ═══════════════════════════════════════
+       UTILITIES
+    ═══════════════════════════════════════ */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 80px);
+    }
+
+    .section-padding {
+      padding: clamp(60px, 8vw, 120px) 0;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold-line);
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 15px 32px;
+      transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: scale(1.02); }
+    .btn:active { transform: scale(0.99); }
+
+    .btn--navy {
+      background: var(--navy);
+      color: var(--white);
+      border: 2px solid var(--navy);
+    }
+    .btn--navy:hover {
+      background: var(--navy-light);
+      border-color: var(--navy-light);
+      box-shadow: 0 8px 30px rgba(27,42,74,0.25);
+    }
+
+    .btn--outline-navy {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+    }
+    .btn--outline-navy:hover {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 8px 30px rgba(27,42,74,0.2);
+    }
+
+    .btn--outline-white {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--white);
+    }
+    .btn--outline-white:hover {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+
+    /* ═══════════════════════════════════════
+       IMAGE PLACEHOLDER
+    ═══════════════════════════════════════ */
+    .img-placeholder {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+
+    .img-placeholder__label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 22px 0;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+    }
+
+    .nav--scrolled {
+      background: var(--white);
+      box-shadow: 0 2px 30px rgba(13,27,42,0.08);
+      padding: 14px 0;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav__logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      transition: color 0.4s;
+      line-height: 1;
+    }
+
+    .nav--scrolled .nav__logo-main { color: var(--text-dark); }
+
+    .nav__logo-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.4s;
+    }
+
+    .nav--scrolled .nav__logo-sub { color: var(--text-light); }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav__link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--white);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .nav__link:hover::after { transform: scaleX(1); }
+    .nav__link:hover { color: var(--white); }
+
+    .nav--scrolled .nav__link { color: var(--text-mid); }
+    .nav--scrolled .nav__link::after { background: var(--navy); }
+    .nav--scrolled .nav__link:hover { color: var(--navy); }
+
+    .nav__cta {
+      padding: 11px 24px;
+      font-size: 0.7rem;
+    }
+
+    .nav--scrolled .nav__cta { /* stays navy */ }
+
+    /* Hamburger */
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1100;
+      background: none;
+      border: none;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: transform 0.35s, opacity 0.35s, background 0.4s;
+      transform-origin: center;
+    }
+
+    .nav--scrolled .nav__hamburger span { background: var(--text-dark); }
+
+    .nav__hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav__hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile overlay */
+    .nav__mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 1050;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+
+    .nav__mobile-overlay.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav__mobile-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      transition: color 0.2s, opacity 0.2s;
+    }
+
+    .nav__mobile-link:hover { color: var(--gold-line); }
+
+    .nav__mobile-cta {
+      margin-top: 16px;
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: -20%;
+      background: linear-gradient(135deg, #1B2A4A 0%, #2C3F6A 50%, #0D1B2A 100%);
+      will-change: transform;
+    }
+
+    .hero__bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(201,168,108,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(44,63,106,0.6) 0%, transparent 50%);
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 20, 38, 0.55);
+      z-index: 1;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 860px;
+      padding: 0 clamp(16px, 4vw, 40px);
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      opacity: 0;
+    }
+
+    .hero__eyebrow::before,
+    .hero__eyebrow::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--gold-line);
+      flex-shrink: 0;
+    }
+
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 7rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      opacity: 0;
+    }
+
+    .hero__title em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero__subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.06em;
+      margin-bottom: 48px;
+      opacity: 0;
+    }
+
+    .hero__ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+
+    .hero__link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s, color 0.2s;
+      padding: 15px 0;
+    }
+
+    .hero__link:hover {
+      gap: 10px;
+      color: var(--white);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+    }
+
+    .hero__scroll-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .hero__scroll-chevron {
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ═══════════════════════════════════════
+       STATS
+    ═══════════════════════════════════════ */
+    .stats {
+      background: var(--navy);
+      padding: clamp(40px, 6vw, 80px) 0;
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stats__item {
+      text-align: center;
+      padding: 24px 16px;
+      position: relative;
+    }
+
+    .stats__item + .stats__item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .stats__number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stats__label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    /* ═══════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════ */
+    .about {
+      background: var(--off-white);
+    }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: center;
+    }
+
+    .about__photo {
+      aspect-ratio: 4/5;
+      border-radius: 2px;
+    }
+
+    .about__photo .img-placeholder__label {
+      font-size: 0.9rem;
+    }
+
+    .about__content {
+      border-left: 3px solid var(--gold-line);
+      padding-left: clamp(24px, 4vw, 48px);
+    }
+
+    .about__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .about__role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text-light);
+      margin-bottom: 28px;
+    }
+
+    .about__bio {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .about__features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .about__feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .about__feature-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--navy);
+    }
+
+    .about__cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s, color 0.2s;
+    }
+
+    .about__cta:hover {
+      gap: 10px;
+      color: var(--navy-light);
+    }
+
+    /* ═══════════════════════════════════════
+       OFFER
+    ═══════════════════════════════════════ */
+    .offer {
+      background: var(--white);
+    }
+
+    .offer__header {
+      text-align: center;
+      margin-bottom: clamp(40px, 6vw, 64px);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+
+    .offer__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .offer__card {
+      border: 1px solid var(--cream);
+      padding: clamp(28px, 3vw, 44px);
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background: var(--white);
+    }
+
+    .offer__card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--navy);
+    }
+
+    .offer__card:hover {
+      border-color: var(--navy);
+      box-shadow: 0 20px 60px rgba(27,42,74,0.1);
+    }
+
+    .offer__icon {
+      width: 44px;
+      height: 44px;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    .offer__card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .offer__card-text {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════
+       INVESTMENTS
+    ═══════════════════════════════════════ */
+    .investments {
+      background: var(--off-white);
+    }
+
+    .investments__header {
+      margin-bottom: clamp(40px, 5vw, 60px);
+    }
+
+    .investments__subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: var(--text-light);
+      margin-top: 10px;
+    }
+
+    .investments__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .inv-card {
+      background: var(--white);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .inv-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(27,42,74,0.15);
+    }
+
+    .inv-card__image {
+      height: 220px;
+      position: relative;
+    }
+
+    .inv-card__badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      z-index: 2;
+    }
+
+    .inv-card__body {
+      padding: 24px;
+    }
+
+    .inv-card__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .inv-card__location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .inv-card__location svg {
+      flex-shrink: 0;
+    }
+
+    .inv-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--cream);
+      padding-top: 16px;
+      margin-top: 4px;
+    }
+
+    .inv-card__price {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .inv-card__cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s, color 0.2s;
+    }
+
+    .inv-card__cta:hover { gap: 8px; color: var(--navy-light); }
+
+    .investments__more {
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════
+       WHY EXIVE
+    ═══════════════════════════════════════ */
+    .why {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why__bg-pattern {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 80%, rgba(201,168,108,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 20%, rgba(44,63,106,0.8) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .why__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .why__quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      line-height: 1.15;
+    }
+
+    .why__quote::before {
+      content: '"';
+      display: block;
+      font-size: 5rem;
+      line-height: 0.6;
+      color: var(--gold-line);
+      opacity: 0.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .why__features {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .why__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .why__feature:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+
+    .why__feature-line {
+      flex-shrink: 0;
+      width: 1px;
+      height: 36px;
+      background: var(--gold-line);
+      margin-top: 4px;
+    }
+
+    .why__feature-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════ */
+    .testimonials {
+      background: var(--white);
+    }
+
+    .testimonials__header {
+      text-align: center;
+      margin-bottom: clamp(40px, 5vw, 60px);
+    }
+
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testi-card {
+      background: var(--off-white);
+      padding: clamp(24px, 3vw, 40px);
+      position: relative;
+    }
+
+    .testi-card__stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 20px;
+    }
+
+    .testi-card__star {
+      color: var(--gold-line);
+    }
+
+    .testi-card__quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-dark);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .testi-card__author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testi-card__avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .testi-card__name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .testi-card__location {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* ═══════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════ */
+    .contact {
+      background: var(--off-white);
+    }
+
+    .contact__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: start;
+    }
+
+    .contact__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .contact__response {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 40px;
+    }
+
+    .contact__info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .contact__info-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .contact__info-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .contact__info-link {
+      color: var(--navy);
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+
+    .contact__info-link:hover { color: var(--navy-light); }
+
+    .contact__socials {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .contact__social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--cream);
+      color: var(--navy);
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+
+    .contact__social:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+
+    .contact__area {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      letter-spacing: 0.06em;
+    }
+
+    .contact__area strong {
+      color: var(--text-mid);
+    }
+
+    /* Form */
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .form__field {
+      position: relative;
+    }
+
+    .form__label {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-light);
+      pointer-events: none;
+      transition: top 0.25s, font-size 0.25s, color 0.25s;
+      transform-origin: left top;
+    }
+
+    .form__input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--text-light);
+      padding: 14px 0 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.3s;
+      resize: none;
+      display: block;
+    }
+
+    .form__input:focus { border-bottom-color: var(--navy); }
+
+    .form__input:focus + .form__label,
+    .form__field.filled .form__label {
+      top: -8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .form__error {
+      display: none;
+      font-size: 0.72rem;
+      color: #C0392B;
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .form__field.has-error .form__error { display: block; }
+    .form__field.has-error .form__input { border-bottom-color: #C0392B; }
+
+    .form__submit {
+      align-self: flex-start;
+      padding: 16px 40px;
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    .footer {
+      background: var(--text-dark);
+      padding: clamp(48px, 7vw, 80px) 0 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1.2fr;
+      gap: clamp(32px, 5vw, 60px);
+      padding-bottom: clamp(40px, 5vw, 60px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer__logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+
+    .footer__logo-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer__slogan {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    .footer__col-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__link {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover { color: var(--white); }
+
+    .footer__company {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.8;
+    }
+
+    .footer__company strong {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .footer__bottom {
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .footer__copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE — 768px
+    ═══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .offer__grid { grid-template-columns: 1fr 1fr; }
+      .investments__grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials__grid { gap: 16px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav__links,
+      .nav__cta { display: none; }
+
+      .nav__hamburger { display: flex; }
+
+      .about__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about__photo { aspect-ratio: 4/3; }
+
+      .offer__grid { grid-template-columns: 1fr; }
+
+      .investments__grid { grid-template-columns: 1fr; }
+
+      .why__grid { grid-template-columns: 1fr; }
+
+      .why__quote { margin-bottom: 32px; }
+
+      .stats__grid { grid-template-columns: repeat(2, 1fr); }
+      .stats__item:nth-child(3)::before { display: none; }
+
+      .testimonials__grid {
+        grid-template-columns: repeat(3, 85vw);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding-bottom: 12px;
+      }
+
+      .testi-card {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+
+      .contact__grid { grid-template-columns: 1fr; }
+
+      .footer__grid { grid-template-columns: 1fr; }
+
+      .hero__ctas { flex-direction: column; align-items: center; }
+    }
+
+    @media (max-width: 375px) {
+      .hero__title { font-size: 2.5rem; }
+    }
+
+    /* ═══════════════════════════════════════
+       REVEAL ANIMATION CLASSES
+    ═══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    /* Scrollbar for testimonials mobile */
+    .testimonials__grid::-webkit-scrollbar { height: 3px; }
+    .testimonials__grid::-webkit-scrollbar-track { background: var(--cream); }
+    .testimonials__grid::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo">
+          <span class="nav__logo-main">EXIVE</span>
+          <span class="nav__logo-sub">Nieruchomości</span>
+        </a>
+        <nav class="nav__links" aria-label="Nawigacja główna">
+          <a href="#offer" class="nav__link">Oferta</a>
+          <a href="#about" class="nav__link">O mnie</a>
+          <a href="#investments" class="nav__link">Inwestycje</a>
+          <a href="#contact" class="nav__link">Kontakt</a>
+        </nav>
+        <a href="#contact" class="btn btn--navy nav__cta">Napisz po oferty</a>
+        <button class="nav__hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile overlay -->
+  <div class="nav__mobile-overlay" id="mobileOverlay" role="navigation">
+    <a href="#offer" class="nav__mobile-link" data-mobile-link>Oferta</a>
+    <a href="#about" class="nav__mobile-link" data-mobile-link>O mnie</a>
+    <a href="#investments" class="nav__mobile-link" data-mobile-link>Inwestycje</a>
+    <a href="#contact" class="nav__mobile-link" data-mobile-link>Kontakt</a>
+    <a href="#contact" class="btn btn--outline-white nav__mobile-cta" data-mobile-link>Napisz po oferty</a>
+  </div>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section class="hero" id="hero" aria-label="Hero">
+      <div class="hero__bg" id="heroBg"></div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <p class="hero__eyebrow" id="heroEyebrow">Bielsko-Biała · Podbeskidzie</p>
+        <h1 class="hero__title" id="heroTitle">
+          <em>Nowe mieszkania</em><br>i inwestycje
+        </h1>
+        <p class="hero__subtitle" id="heroSubtitle">
+          Rynek pierwotny · 0% prowizji · Robert Klyta
+        </p>
+        <div class="hero__ctas" id="heroCtas">
+          <a href="#investments" class="btn btn--outline-white">Sprawdź aktualne oferty</a>
+          <a href="#contact" class="hero__link">
+            Napisz bezpośrednio
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero__scroll" id="heroScroll" aria-hidden="true">
+        <span class="hero__scroll-text">Przewiń</span>
+        <svg class="hero__scroll-chevron" width="20" height="12" viewBox="0 0 20 12" fill="none">
+          <path d="M1 1l9 9 9-9" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         STATS
+    ═══════════════════════════════════════ -->
+    <section class="stats" id="stats" aria-label="Statystyki">
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stats__item reveal">
+            <span class="stats__number" data-count="0" data-suffix="%">0%</span>
+            <span class="stats__label">Prowizji</span>
+          </div>
+          <div class="stats__item reveal">
+            <span class="stats__number" data-count="100" data-suffix="+">100+</span>
+            <span class="stats__label">Zadowolonych klientów</span>
+          </div>
+          <div class="stats__item reveal">
+            <span class="stats__number" data-count="50" data-suffix="+">50+</span>
+            <span class="stats__label">Inwestycji w portfelu</span>
+          </div>
+          <div class="stats__item reveal">
+            <span class="stats__number" data-count="5" data-suffix="★">5★</span>
+            <span class="stats__label">Średnia ocena</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         ABOUT
+    ═══════════════════════════════════════ -->
+    <section class="about section-padding" id="about" aria-label="O mnie">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__photo img-placeholder reveal" aria-label="Zdjęcie Roberta Klyty">
+            <span class="img-placeholder__label">Zdjęcie wkrótce</span>
+          </div>
+          <div class="about__content reveal">
+            <span class="section-label">O mnie</span>
+            <h2 class="about__name">Robert Klyta</h2>
+            <p class="about__role">Ekspert rynku pierwotnego w Bielsku-Białej</p>
+            <p class="about__bio">
+              Pomagam klientom znaleźć wymarzone mieszkanie lub dom na rynku pierwotnym — bez prowizji, bez ukrytych kosztów. Działam na terenie Bielska-Białej i całego Podbeskidzia, współpracując bezpośrednio z deweloperami. Każdego klienta traktuję indywidualnie, bo wiem, że zakup nieruchomości to jedna z najważniejszych decyzji w życiu.
+            </p>
+            <ul class="about__features">
+              <li class="about__feature">
+                <svg class="about__feature-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                0% prowizji dla kupującego
+              </li>
+              <li class="about__feature">
+                <svg class="about__feature-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Rynek pierwotny — nowe inwestycje
+              </li>
+              <li class="about__feature">
+                <svg class="about__feature-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Bielsko-Biała i Podbeskidzie
+              </li>
+              <li class="about__feature">
+                <svg class="about__feature-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Indywidualne podejście do klienta
+              </li>
+            </ul>
+            <a href="#contact" class="about__cta">
+              Napisz do mnie
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         OFFER
+    ═══════════════════════════════════════ -->
+    <section class="offer section-padding" id="offer" aria-label="Oferta">
+      <div class="container">
+        <div class="offer__header reveal">
+          <span class="section-label">Co oferuję</span>
+          <h2 class="section-title">Kompleksowa obsługa zakupu</h2>
+        </div>
+        <div class="offer__grid">
+          <article class="offer__card reveal">
+            <svg class="offer__icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <rect x="4" y="20" width="36" height="22" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4 20L22 6l18 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="16" y="30" width="12" height="12" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M14 20v-4a2 2 0 014 0v4" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3 class="offer__card-title">Wyszukiwanie inwestycji</h3>
+            <p class="offer__card-text">Dostęp do najlepszych inwestycji deweloperskich w Bielsku-Białej i Podbeskidziu, zanim trafią na portale. Pierwsze informacje, najlepsze ceny.</p>
+          </article>
+          <article class="offer__card reveal">
+            <svg class="offer__icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 28l12-12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="16" cy="17" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="28" cy="27" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3 class="offer__card-title">0% Prowizji</h3>
+            <p class="offer__card-text">Wynagrodzenie pokrywa deweloper. Kupujesz nowe mieszkanie bez żadnych dodatkowych kosztów agencyjnych — zawsze i bez wyjątku.</p>
+          </article>
+          <article class="offer__card reveal">
+            <svg class="offer__icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <path d="M22 8l3.5 3.5L30 10l1 4.5 4.5 1-1.5 4.5 3.5 3.5-3.5 3.5 1.5 4.5-4.5 1L30 36l-4.5-1.5L22 38l-3.5-3.5L14 36l-1-4.5-4.5-1 1.5-4.5L6.5 22l3.5-3.5-1.5-4.5 4.5-1L14 8l4.5 1.5L22 8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M17 22c0-2.76 2.24-5 5-5 1.5 0 2.84.66 3.77 1.71" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M22 17v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="offer__card-title">Wsparcie do odbioru</h3>
+            <p class="offer__card-text">Towarzyszę Ci na każdym etapie — od wyboru mieszkania, przez umowę deweloperską, aż po odbiór kluczy. Jesteś w dobrych rękach.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         INVESTMENTS
+    ═══════════════════════════════════════ -->
+    <section class="investments section-padding" id="investments" aria-label="Aktualne inwestycje">
+      <div class="container">
+        <div class="investments__header reveal">
+          <span class="section-label">Portfel</span>
+          <h2 class="section-title">Aktualne inwestycje</h2>
+          <p class="investments__subtitle">Bielsko-Biała · Podbeskidzie · Rynek pierwotny</p>
+        </div>
+        <div class="investments__grid">
+
+          <article class="inv-card reveal">
+            <div class="inv-card__image img-placeholder">
+              <span class="inv-card__badge">NOWY</span>
+              <span class="img-placeholder__label">Inwestycja wkrótce</span>
+            </div>
+            <div class="inv-card__body">
+              <h3 class="inv-card__name">Centrum Park</h3>
+              <p class="inv-card__location">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="7" cy="5" r="1.3" stroke="currentColor" stroke-width="1.2"/></svg>
+                Bielsko-Biała, Centrum
+              </p>
+              <div class="inv-card__footer">
+                <span class="inv-card__price">od 480 000 zł</span>
+                <a href="#contact" class="inv-card__cta">
+                  Zapytaj o ofertę
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M7.5 3.5l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="inv-card reveal">
+            <div class="inv-card__image img-placeholder">
+              <span class="inv-card__badge">NOWY</span>
+              <span class="img-placeholder__label">Inwestycja wkrótce</span>
+            </div>
+            <div class="inv-card__body">
+              <h3 class="inv-card__name">Górska Panorama</h3>
+              <p class="inv-card__location">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="7" cy="5" r="1.3" stroke="currentColor" stroke-width="1.2"/></svg>
+                Bielsko-Biała, Złote Łany
+              </p>
+              <div class="inv-card__footer">
+                <span class="inv-card__price">od 520 000 zł</span>
+                <a href="#contact" class="inv-card__cta">
+                  Zapytaj o ofertę
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M7.5 3.5l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="inv-card reveal">
+            <div class="inv-card__image img-placeholder">
+              <span class="inv-card__badge">NOWY</span>
+              <span class="img-placeholder__label">Inwestycja wkrótce</span>
+            </div>
+            <div class="inv-card__body">
+              <h3 class="inv-card__name">Zielone Wzgórza</h3>
+              <p class="inv-card__location">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="7" cy="5" r="1.3" stroke="currentColor" stroke-width="1.2"/></svg>
+                Szczyrk
+              </p>
+              <div class="inv-card__footer">
+                <span class="inv-card__price">od 450 000 zł</span>
+                <a href="#contact" class="inv-card__cta">
+                  Zapytaj o ofertę
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M7.5 3.5l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="inv-card reveal">
+            <div class="inv-card__image img-placeholder">
+              <span class="inv-card__badge">NOWY</span>
+              <span class="img-placeholder__label">Inwestycja wkrótce</span>
+            </div>
+            <div class="inv-card__body">
+              <h3 class="inv-card__name">Apartamenty Lipnik</h3>
+              <p class="inv-card__location">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="7" cy="5" r="1.3" stroke="currentColor" stroke-width="1.2"/></svg>
+                Bielsko-Biała, Lipnik
+              </p>
+              <div class="inv-card__footer">
+                <span class="inv-card__price">od 390 000 zł</span>
+                <a href="#contact" class="inv-card__cta">
+                  Zapytaj o ofertę
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M7.5 3.5l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="inv-card reveal">
+            <div class="inv-card__image img-placeholder">
+              <span class="inv-card__badge">NOWY</span>
+              <span class="img-placeholder__label">Inwestycja wkrótce</span>
+            </div>
+            <div class="inv-card__body">
+              <h3 class="inv-card__name">Osiedle Zachód</h3>
+              <p class="inv-card__location">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="7" cy="5" r="1.3" stroke="currentColor" stroke-width="1.2"/></svg>
+                Bielsko-Biała, Hałcnów
+              </p>
+              <div class="inv-card__footer">
+                <span class="inv-card__price">od 410 000 zł</span>
+                <a href="#contact" class="inv-card__cta">
+                  Zapytaj o ofertę
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M7.5 3.5l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="inv-card reveal">
+            <div class="inv-card__image img-placeholder">
+              <span class="inv-card__badge">NOWY</span>
+              <span class="img-placeholder__label">Inwestycja wkrótce</span>
+            </div>
+            <div class="inv-card__body">
+              <h3 class="inv-card__name">Beskidzki Dwór</h3>
+              <p class="inv-card__location">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="7" cy="5" r="1.3" stroke="currentColor" stroke-width="1.2"/></svg>
+                Żywiec
+              </p>
+              <div class="inv-card__footer">
+                <span class="inv-card__price">od 360 000 zł</span>
+                <a href="#contact" class="inv-card__cta">
+                  Zapytaj o ofertę
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M7.5 3.5l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+        <div class="investments__more reveal">
+          <a href="#contact" class="btn btn--outline-navy">Zobacz wszystkie oferty</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         WHY EXIVE
+    ═══════════════════════════════════════ -->
+    <section class="why section-padding" id="why" aria-label="Dlaczego EXIVE">
+      <div class="why__bg-pattern" aria-hidden="true"></div>
+      <div class="container">
+        <div class="why__grid">
+          <div class="why__left reveal">
+            <span class="section-label" style="color:rgba(255,255,255,0.4)">Dlaczego EXIVE</span>
+            <blockquote class="why__quote">
+              Dbamy o Twoje finanse i Twoje nowe mieszkanie
+            </blockquote>
+          </div>
+          <div class="why__right reveal">
+            <ul class="why__features">
+              <li class="why__feature">
+                <div class="why__feature-line"></div>
+                <p class="why__feature-text">Bezpośrednia współpraca z deweloperami — bez pośredników i marż.</p>
+              </li>
+              <li class="why__feature">
+                <div class="why__feature-line"></div>
+                <p class="why__feature-text">Oferty przed premierą rynkową — trafiają do Ciebie jako pierwszego.</p>
+              </li>
+              <li class="why__feature">
+                <div class="why__feature-line"></div>
+                <p class="why__feature-text">0% prowizji — zawsze, bez wyjątków i ukrytych kosztów.</p>
+              </li>
+              <li class="why__feature">
+                <div class="why__feature-line"></div>
+                <p class="why__feature-text">Bielsko-Biała i okolice — znajomość lokalnego rynku i relacje z deweloperami.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         TESTIMONIALS
+    ═══════════════════════════════════════ -->
+    <section class="testimonials section-padding" id="testimonials" aria-label="Opinie klientów">
+      <div class="container">
+        <div class="testimonials__header reveal">
+          <span class="section-label">Opinie</span>
+          <h2 class="section-title">Co mówią klienci</h2>
+        </div>
+        <div class="testimonials__grid">
+
+          <article class="testi-card reveal">
+            <div class="testi-card__stars" aria-label="5 na 5 gwiazdek">
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+            </div>
+            <blockquote class="testi-card__quote">
+              "Dzięki Robertowi znaleźliśmy wymarzone mieszkanie bez stresu i bez prowizji. Cały proces przebiegł płynnie, a Robert był dostępny na każdym etapie. Polecam każdemu!"
+            </blockquote>
+            <div class="testi-card__author">
+              <div class="testi-card__avatar img-placeholder" aria-hidden="true"></div>
+              <div>
+                <p class="testi-card__name">Anna K.</p>
+                <p class="testi-card__location">Bielsko-Biała</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="testi-card reveal">
+            <div class="testi-card__stars" aria-label="5 na 5 gwiazdek">
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+            </div>
+            <blockquote class="testi-card__quote">
+              "Profesjonalizm na najwyższym poziomie. Robert pomógł nam znaleźć mieszkanie w nowej inwestycji, o której jeszcze nie słyszeliśmy — i to w świetnej cenie. Żadnej prowizji!"
+            </blockquote>
+            <div class="testi-card__author">
+              <div class="testi-card__avatar img-placeholder" aria-hidden="true"></div>
+              <div>
+                <p class="testi-card__name">Marek i Joanna W.</p>
+                <p class="testi-card__location">Bielsko-Biała</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="testi-card reveal">
+            <div class="testi-card__stars" aria-label="5 na 5 gwiazdek">
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              <svg class="testi-card__star" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10.1 4.4 12l.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+            </div>
+            <blockquote class="testi-card__quote">
+              "Szczere i kompetentne doradztwo. Robert zna rynek od podszewki — wiedział, które inwestycje są warte uwagi, a które omijać szerokim łukiem. Zdecydowanie wart zaufania."
+            </blockquote>
+            <div class="testi-card__author">
+              <div class="testi-card__avatar img-placeholder" aria-hidden="true"></div>
+              <div>
+                <p class="testi-card__name">Piotr S.</p>
+                <p class="testi-card__location">Bielsko-Biała</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CONTACT
+    ═══════════════════════════════════════ -->
+    <section class="contact section-padding" id="contact" aria-label="Kontakt">
+      <div class="container">
+        <div class="contact__grid">
+
+          <div class="contact__info reveal">
+            <span class="section-label">Kontakt</span>
+            <h2 class="contact__title">Napisz po oferty</h2>
+            <p class="contact__response">Odpowiem w ciągu 24 godzin</p>
+            <ul class="contact__info-list">
+              <li class="contact__info-item">
+                <svg class="contact__info-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 4h12a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M3 5l7 6 7-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <a href="mailto:biuro@exive.pl" class="contact__info-link">biuro@exive.pl</a>
+              </li>
+              <li class="contact__info-item">
+                <svg class="contact__info-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4.5 3.5l2.5 2.5L5.5 7.5c1 2 3.5 4.5 5.5 5.5l1.5-1.5 2.5 2.5-2.5 2.5C8 18 2 12 2 7.5L4.5 3.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a href="tel:+48502610857" class="contact__info-link">+48 502 610 857</a>
+              </li>
+              <li class="contact__info-item">
+                <svg class="contact__info-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4.5 3.5l2.5 2.5L5.5 7.5c1 2 3.5 4.5 5.5 5.5l1.5-1.5 2.5 2.5-2.5 2.5C8 18 2 12 2 7.5L4.5 3.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <a href="tel:+48501498702" class="contact__info-link">+48 501 498 702</a>
+              </li>
+            </ul>
+            <div class="contact__socials">
+              <a href="#" class="contact__social" aria-label="Facebook">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M13 2h-2.5A3.5 3.5 0 007 5.5V8H5v3h2v7h3V11h2.5l.5-3H10V5.5a.5.5 0 01.5-.5H13V2z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="#" class="contact__social" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <rect x="2" y="2" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.3"/>
+                  <circle cx="9" cy="9" r="3.2" stroke="currentColor" stroke-width="1.3"/>
+                  <circle cx="13.1" cy="4.9" r="0.8" fill="currentColor"/>
+                </svg>
+              </a>
+            </div>
+            <p class="contact__area">
+              Obszar działania:<br>
+              <strong>Bielsko-Biała</strong> | <strong>Podbeskidzie</strong>
+            </p>
+          </div>
+
+          <div class="contact__form-wrap reveal">
+            <form class="form" id="contactForm" novalidate>
+              <div class="form__field" id="field-name">
+                <input type="text" id="name" name="name" class="form__input" autocomplete="name" required>
+                <label for="name" class="form__label">Imię i Nazwisko</label>
+                <p class="form__error" id="error-name">Proszę podać imię i nazwisko.</p>
+              </div>
+              <div class="form__field" id="field-phone">
+                <input type="tel" id="phone" name="phone" class="form__input" autocomplete="tel" required>
+                <label for="phone" class="form__label">Telefon</label>
+                <p class="form__error" id="error-phone">Proszę podać numer telefonu.</p>
+              </div>
+              <div class="form__field" id="field-email">
+                <input type="email" id="email" name="email" class="form__input" autocomplete="email" required>
+                <label for="email" class="form__label">E-mail</label>
+                <p class="form__error" id="error-email">Proszę podać prawidłowy adres e-mail.</p>
+              </div>
+              <div class="form__field" id="field-message">
+                <textarea id="message" name="message" class="form__input" rows="4" required></textarea>
+                <label for="message" class="form__label">Wiadomość</label>
+                <p class="form__error" id="error-message">Proszę wpisać wiadomość.</p>
+              </div>
+              <button type="submit" class="btn btn--navy form__submit" id="submitBtn">
+                Wyślij wiadomość
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo-main">EXIVE</p>
+          <p class="footer__logo-sub">Nieruchomości</p>
+          <p class="footer__slogan">dbamy o Twoje finanse<br>i Twoje nowe mieszkanie</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Nawigacja</p>
+          <ul class="footer__links">
+            <li><a href="#offer" class="footer__link">Oferta</a></li>
+            <li><a href="#about" class="footer__link">O mnie</a></li>
+            <li><a href="#contact" class="footer__link">Kontakt</a></li>
+            <li><a href="#investments" class="footer__link">Inwestycje</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Dane firmowe</p>
+          <p class="footer__company">
+            <strong>EXIVE Sp. z o.o.</strong><br>
+            NIP: 2220924397<br>
+            ul. Andrzeja Zielnioka 71/AZ<br>
+            41-409 Mysłowice<br><br>
+            <a href="mailto:biuro@exive.pl" style="color:rgba(255,255,255,0.4);transition:color 0.2s" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">biuro@exive.pl</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 EXIVE Nieruchomości · Robert Klyta · Wszelkie prawa zastrzeżone</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── NAV SCROLL ─────────────────────────── */
+    const nav = document.getElementById('nav');
+    function handleNavScroll() {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 80);
+    }
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    /* ── HAMBURGER ──────────────────────────── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function openMenu() {
+      hamburger.classList.add('is-open');
+      mobileOverlay.classList.add('is-open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('is-open');
+      mobileOverlay.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', function () {
+      hamburger.classList.contains('is-open') ? closeMenu() : openMenu();
+    });
+
+    document.querySelectorAll('[data-mobile-link]').forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    /* ── FLOATING LABELS ────────────────────── */
+    document.querySelectorAll('.form__input').forEach(function (input) {
+      var field = input.closest('.form__field');
+
+      function updateFilled() {
+        field.classList.toggle('filled', input.value.trim().length > 0);
+      }
+
+      input.addEventListener('blur', updateFilled);
+      input.addEventListener('input', function () {
+        if (field.classList.contains('has-error')) {
+          field.classList.remove('has-error');
+        }
+      });
+    });
+
+    /* ── FORM VALIDATION ────────────────────── */
+    var form = document.getElementById('contactForm');
+    var submitBtn = document.getElementById('submitBtn');
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var valid = true;
+
+      var fields = [
+        { id: 'name', fieldId: 'field-name', check: function (v) { return v.trim().length >= 2; } },
+        { id: 'phone', fieldId: 'field-phone', check: function (v) { return v.trim().length >= 9; } },
+        { id: 'email', fieldId: 'field-email', check: validateEmail },
+        { id: 'message', fieldId: 'field-message', check: function (v) { return v.trim().length >= 5; } },
+      ];
+
+      fields.forEach(function (f) {
+        var input = document.getElementById(f.id);
+        var fieldEl = document.getElementById(f.fieldId);
+        if (!f.check(input.value)) {
+          fieldEl.classList.add('has-error');
+          valid = false;
+        } else {
+          fieldEl.classList.remove('has-error');
+        }
+      });
+
+      if (valid) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '✓ Wysłano!';
+        submitBtn.style.background = '#2d7a4f';
+        submitBtn.style.borderColor = '#2d7a4f';
+      }
+    });
+
+    /* ── GSAP ANIMATIONS ────────────────────── */
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance stagger
+    var heroTimeline = gsap.timeline({ delay: 0.3 });
+    heroTimeline
+      .to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+      .to('#heroTitle', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.6')
+      .to('#heroSubtitle', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.6')
+      .to('#heroCtas', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.6')
+      .to('#heroScroll', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+
+    // Set initial states for hero elements
+    gsap.set(['#heroEyebrow', '#heroTitle', '#heroSubtitle', '#heroCtas'], { y: 30 });
+    heroTimeline.restart();
+
+    // Hero parallax
+    gsap.to('#heroBg', {
+      yPercent: 30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    // Why EXIVE parallax (subtle)
+    gsap.to('.why__bg-pattern', {
+      yPercent: -15,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#why',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    // Scroll reveals
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      gsap.from(el, {
+        opacity: 0,
+        y: 50,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+
+    /* ── COUNTER ANIMATION ──────────────────── */
+    var counters = document.querySelectorAll('[data-count]');
+    var countersAnimated = false;
+
+    var counterObserver = new IntersectionObserver(function (entries) {
+      if (countersAnimated) return;
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          countersAnimated = true;
+          counters.forEach(function (counter) {
+            var target = parseInt(counter.getAttribute('data-count'), 10);
+            var suffix = counter.getAttribute('data-suffix') || '';
+            var start = 0;
+            var duration = 1800;
+            var startTime = null;
+
+            function step(timestamp) {
+              if (!startTime) startTime = timestamp;
+              var progress = Math.min((timestamp - startTime) / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+              var current = Math.round(eased * target);
+              counter.textContent = current + suffix;
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                counter.textContent = target + suffix;
+              }
+            }
+
+            requestAnimationFrame(step);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (counters.length > 0) {
+      counterObserver.observe(document.getElementById('stats'));
+    }
+
+  }());
+  </script>
+
+</body>
+</html>
